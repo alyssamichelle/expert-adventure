@@ -1,0 +1,38 @@
+$alyssas-fav-timing-function: cubic-bezier(.17,.67,.83,.67);
+$randomNumber: random(1000);
+$page-change-delay: 2s;
+
+.default-anchor-list {
+  animation: disappear 1s $alyssas-fav-timing-function forwards $page-change-delay; // forwards = stay on final keyframe, don't loop
+}
+
+.shield-left {
+  animation: fly-apart 2s $alyssas-fav-timing-function $page-change-delay forwards;
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    filter: blur(20px) grayscale(20%);
+  }
+  99% {
+    opacity: 0;
+  }
+  100% { 
+    opacity: 0;
+    display: none; // clean up, stop painting this
+  }
+}
+
+@keyframes fly-apart {
+  0% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+}
