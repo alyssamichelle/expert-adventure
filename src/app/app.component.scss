@@ -2,12 +2,20 @@ $alyssas-fav-timing-function: cubic-bezier(.17,.67,.83,.67);
 $randomNumber: random(1000);
 $page-change-delay: 2s;
 
-.default-anchor-list {
-  animation: disappear 1s $alyssas-fav-timing-function forwards $page-change-delay; // forwards = stay on final keyframe, don't loop
+.default-page-elements {
+  animation: disappear 1s $alyssas-fav-timing-function forwards $page-change-delay; 
+  // forwards = stay on final keyframe, don't loop
 }
 
+// TODO Alyssa: step these out one by one
+.default-anchor-list li {
+  animation: disappear 1s $alyssas-fav-timing-function forwards $page-change-delay; 
+}
+
+// is the only way to have this fly off by having indivdual svgs and then translating each one?
+// or should I make the viewport massive? .... hmmmmmmmm
 .shield-left {
-  animation: fly-apart 2s $alyssas-fav-timing-function $page-change-delay forwards;
+  animation: fly-apart .2s ease $page-change-delay forwards;
 }
 
 @keyframes disappear {
@@ -28,11 +36,12 @@ $page-change-delay: 2s;
 
 @keyframes fly-apart {
   0% {
-    opacity: 1;
     transform: translateX(0px);
   }
   100% {
-    opacity: 0;
     transform: translateX(-100px);
   }
 }
+
+
+// ALYSSA TODO: turn angular A into Alyssa's A
