@@ -1,7 +1,12 @@
 $alyssas-fav-timing-function: cubic-bezier(.17,.67,.83,.67);
-$randomNumber: random(1000);
-$page-change-delay: 2s;
+$randomNumber: random(200) - 100;
+$page-change-delay: .5s;
+$annoying-animation-crap: 1s $alyssas-fav-timing-function forwards $page-change-delay;
 
+body { //view encapsulation none
+  background-color: white;
+  animation: flicker .5s ease;
+}
 .default-page-elements {
   animation: disappear 1s $alyssas-fav-timing-function forwards $page-change-delay; 
   // forwards = stay on final keyframe, don't loop
@@ -12,11 +17,28 @@ $page-change-delay: 2s;
   animation: disappear 1s $alyssas-fav-timing-function forwards $page-change-delay; 
 }
 
-// is the only way to have this fly off by having indivdual svgs and then translating each one?
-// or should I make the viewport massive? .... hmmmmmmmm
-.shield-left {
-  animation: fly-apart .2s ease $page-change-delay forwards;
+// KEYFRAMES
+
+@keyframes flicker { // bg, font, 
+  0%   { background-color: white; }
+  50%  { background-color: black; }
+  90%  { background-color: rgb(244, 244, 168); }
+  100% { background-color: black; }
 }
+
+// @keyframes flicker { // bg, font, 
+//   0%   { background-color: white; }
+//   10%  { background-color: black; }
+//   20%  { background-color: white; }
+//   30%  { background-color: black; }
+//   40%  { background-color: white; }
+//   50%  { background-color: black; }
+//   60%  { background-color: white; }
+//   70%  { background-color: black; }
+//   80%  { background-color: white; }
+//   90%  { background-color: black; }
+//   100% { background-color: white; }
+// }
 
 @keyframes disappear {
   0% {
@@ -30,18 +52,47 @@ $page-change-delay: 2s;
   }
   100% { 
     opacity: 0;
-    display: none; // clean up, stop painting this
+    display: none !important; // clean up, stop painting this
   }
 }
 
-@keyframes fly-apart {
+@keyframes fly-left {
   0% {
-    transform: translateX(0px);
+    transform: translate(0px, 0px);
   }
   100% {
-    transform: translateX(-100px);
+    transform: translate(#{random(2000) - 1000}px, #{random(2000) - 1000}px);
   }
 }
 
+@keyframes fly-right {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(#{random(2000) - 1000}px, #{random(2000) - 1000}px);
+    // want random numbers on every page load? Reason for JS #1
+  }
+}
+
+
+ // SVG STYLES
+svg {
+  overflow: visible;
+}
+
+.shield-left {
+  fill: #DD0031;
+  animation: fly-left 1s ease $page-change-delay forwards;
+}
+
+.shield-right {
+  fill: #C3002F;
+  animation: fly-right 1s ease $page-change-delay forwards;
+}
+
+.angular-a {
+  fill: #FFFFFF;
+}
 
 // ALYSSA TODO: turn angular A into Alyssa's A
